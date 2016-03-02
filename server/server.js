@@ -7,7 +7,7 @@ var Handlebars = require('handlebars');
 
 //TODO register custom plugins
 
-var plugins = [Inert, Vision];
+var plugins = [Inert, Vision, Validate];
 
 server.connection({
     port: process.env.PORT || 3000
@@ -23,6 +23,10 @@ server.start(function(err) {
     console.log("Server is running at: ", server.info.uri);
 });
 
+<<<<<<< HEAD
 module.exports = {
     server: server
 };
+=======
+module.exports = server;
+>>>>>>> master
