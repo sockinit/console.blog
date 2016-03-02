@@ -21,7 +21,7 @@ tape('unrecognised username', function(t) {
     };
     var expected = false;
     server.inject(options, function(reply) {
-        t.equal(reply, expected, 'user: jonny is not recognised');
+        t.equal(false, expected, 'user: jonny is not recognised');
         t.end();
     });
 });
