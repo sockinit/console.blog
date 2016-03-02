@@ -1,14 +1,20 @@
+// 'use strict';
+
 var Hapi = require('hapi');
 var server = new Hapi.Server();
 var Inert = require('inert');
 var Vision = require('vision');
+var Validate = require('./validate.js');
+var blogDB = require('./blogDB.js');
 var Handlebars = require('handlebars');
 var Basic = require('hapi-auth-basic');
 var client = require('./redis.js');
 
 //TODO register custom plugins
+//TODO add validate back in there
 
-var plugins = [Inert, Vision, Basic];
+var plugins = [Inert, Vision, Basic, blogDB];
+
 
 server.connection({
     port: process.env.PORT || 3000
