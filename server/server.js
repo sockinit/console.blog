@@ -10,17 +10,23 @@ var Handlebars = require('handlebars');
 var plugins = [Inert, Vision, Validate];
 
 server.connection({
-    port: process.env.PORT ||3000
+    port: process.env.PORT || 3000
 });
 
 server.register(plugins, function(err) {
 
-    console.log(err);
+    console.log('err---->', err);
 });
 
 server.start(function(err) {
-        if (err) throw err;
-        console.log("Server is running at: ", server.info.uri);
+    if (err) throw err;
+    console.log("Server is running at: ", server.info.uri);
 });
 
+<<<<<<< HEAD
+module.exports = {
+    server: server
+};
+=======
 module.exports = server;
+>>>>>>> master
