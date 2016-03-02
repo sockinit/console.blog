@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "node ./node_modules/bin/istanbul cover tape ./tests/*.js",
+    "test": "tape ./tests/*.js",
     "start": "nodemon ./server/server.js",
     "coverage": "istanbul cover tape ./tests/*"
   },
@@ -32,6 +32,8 @@
   "devDependencies": {
     "istanbul": "^0.4.2",
     "nodemon": "^1.9.1",
+    "redis-mock": "^0.5.1",
+    "shot": "^3.0.1",
     "tape": "^4.4.0"
   }
 }
