@@ -7,8 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon /server/server.js"
+      "test": "node ./node_modules/bin/istanbul cover tape ./tests/*.js",
+      "start": "node ./server/server.js",
+      "coverage": "istanbul cover tape ./tests/*"
   },
   "repository": {
     "type": "git",
