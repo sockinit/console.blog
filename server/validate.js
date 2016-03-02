@@ -1,27 +1,48 @@
 
+var Bcrypt = require('bcrypt');
+
+var validate = function (request, username, password, callback) {
+
+    // client.SMEMBERS('users', function(err, response){
+        // if(err){
+        //     throw err;
+        // }
+        var users = [
+            JSON.stringify({username: 'ivan', password: '$2a$08$OA3Eidr7fkq7oobrbDOZ5eXHGMGprcMJoxLXV9Kcxhf/HyQCGuRB2'}),
+            JSON.stringify({username: 'jack', password: '$2a$08$u/9WsZcYA1VapdBzC1H3b.JrasR6gsJF6bQiOGAn0sAnl7CFqgmGe'})
+        ];
+
+        var userRes = users.filter(function(item){
+
+            var user = JSON.parse(item);
+
+            return user[username] === request.params.username;
+        });
+
+        if (userRes.length > 0) {
+
+            var deets = JSON.parse(userRes);
+
+            Bcrypt.compare(password, deets.password, function(err, isValid) {
+                callback(err, isValid, {username: deets.username});
+            });
+
+        } else {
+            return callback (null, false);
+        }
+    // });
+};
+
 exports.register = function(server, options, next){
     server.route({
         method: 'GET',
-        path: '/users/{name}/{password}',
+        path: '/users/{username}/{password}',
         config: {
             auth: 'simple',
             handler: function ( request, reply ){
-
-
-                client.SMEMBERS('users', function(err, response){
-                    if(err){
-                        throw err;
-                    }
-                    response.filter(function(item){
-                        var user = JSON.parse(item);
-                        // if(user[username] === )
-                    });
-                    reply();
-                });
-
-
+                    reply('Welcome!');
+                }
             }
-        }
     });
 
 

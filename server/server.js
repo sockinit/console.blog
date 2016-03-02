@@ -4,16 +4,18 @@ var Inert = require('inert');
 var Vision = require('vision');
 var Validate = require('./validate.js');
 var Handlebars = require('handlebars');
+var Basic = require('hapi-auth-basic');
 
 //TODO register custom plugins
 
-var plugins = [Inert, Vision, Validate];
+var plugins = [Inert, Vision, Validate, Basic];
 
 server.connection({
     port: process.env.PORT ||3000
 });
 
 server.register(plugins, function(err) {
+    server.auth.strategy('simple', 'basic', { validateFunc: validate });
 
     console.log(err);
 });
