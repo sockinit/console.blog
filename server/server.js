@@ -56,6 +56,16 @@ server.register(plugins, function(err) {
             }
     });
 
+    server.route({
+          method: 'GET',
+          path: '/{param*}',
+          handler: {
+            directory: {
+              path: 'public'
+            }
+          }
+    });
+
     console.log('err---->', err);
 });
 
