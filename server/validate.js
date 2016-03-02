@@ -34,6 +34,7 @@ var validate = function (request, username, password, callback) {
 };
 
 exports.register = function(server, options, next){
+
     server.route({
         method: 'GET',
         path: '/users/{username}/{password}',
