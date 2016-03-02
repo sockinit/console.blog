@@ -1,3 +1,15 @@
+
+exports.register = function(server, options, next){
+    server.route()
+
+    next();
+};
+exports.register.attributes = {
+    name: 'validate'
+};
+
+
+
 // 'use strict';
 //
 //
