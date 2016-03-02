@@ -1,13 +1,19 @@
 
 exports.register = function(server, options, next){
-    server.route()
+    server.route({
+        method: 'GET',
+        path: '/users',
+        handler: function (request, reply) {
+            reply();
+        }
+    });
+
 
     next();
 };
 exports.register.attributes = {
     name: 'validate'
 };
-
 
 
 // 'use strict';
