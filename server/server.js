@@ -11,7 +11,7 @@ var client = require('./redis.js');
 var plugins = [Inert, Vision, Basic];
 
 server.connection({
-    port: process.env.PORT ||3000
+    port: process.env.PORT || 3000
 });
 
 server.register(plugins, function(err) {
@@ -50,11 +50,12 @@ server.register(plugins, function(err) {
             }
     });
 
+    console.log('err---->', err);
 });
 
 server.start(function(err) {
-        if (err) throw err;
-        console.log("Server is running at: ", server.info.uri);
+    if (err) throw err;
+    console.log("Server is running at: ", server.info.uri);
 });
 
 module.exports = server;
