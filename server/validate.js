@@ -2,9 +2,25 @@
 exports.register = function(server, options, next){
     server.route({
         method: 'GET',
-        path: '/users',
-        handler: function (request, reply) {
-            reply();
+        path: '/users/{name}/{password}',
+        config: {
+            auth: 'simple',
+            handler: function ( request, reply ){
+
+
+                client.SMEMBERS('users', function(err, response){
+                    if(err){
+                        throw err;
+                    }
+                    response.filter(function(item){
+                        var user = JSON.parse(item);
+                        // if(user[username] === )
+                    });
+                    reply();
+                });
+
+
+            }
         }
     });
 

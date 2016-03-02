@@ -17,12 +17,11 @@ tape('200 status code responded with /users', function(t) {
 tape('unrecognised username', function(t) {
     var options = {
         method: 'GET',
-        url: '/users'
+        url: '/users/jonny'
     };
-    var actual = 'jonny';
     var expected = false;
     server.inject(options, function(reply) {
-        t.equal(actual, expected, 'user is not recognised');
+        t.equal(reply, expected, 'user: jonny is not recognised');
         t.end();
     });
 });
