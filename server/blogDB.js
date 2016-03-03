@@ -19,6 +19,9 @@ exports.register = function(server, options, next) {
         config: {
             handler: function(request, reply) {
                 function retrieveBlogs(client, callback) {
+                    //uncomment following line and refresh page if you want to
+                    //flush DB
+                    // client.flushall();
                     client.LRANGE('posts', 0, -1, function(err, reply) {
                         if (err) {
                             console.log(err);
@@ -28,7 +31,13 @@ exports.register = function(server, options, next) {
                     });
                 }
                 retrieveBlogs(client, function(postObjectsArray) {
-                    reply.view('home', {data: postObjectsArray});
+                    // typeof postObjectsArray is object here
+                    var parsedArray = postObjectsArray.map(function(el) {
+                        return JSON.parse(el);
+                    }).reverse();
+                    console.log('parsedobjects ------',parsedArray);
+                    // var keysArray = Object.keys(postObjectsArray);
+                    reply.view('home', {data: parsedArray});
                 });
             }
         }
@@ -64,7 +73,7 @@ exports.register = function(server, options, next) {
             }
         }
     });
-    
+
     next();
 };
 
