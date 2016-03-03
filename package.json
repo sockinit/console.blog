@@ -1,6 +1,9 @@
 {
   "name": "console.blog",
   "version": "1.0.0",
+  "engines": {
+    "node": "5.5.0"
+},
   "description": "",
   "main": "server/server.js",
   "directories": {
