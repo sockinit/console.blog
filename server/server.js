@@ -16,7 +16,7 @@ var plugins = [Inert, Vision, Basic, blogDB, Validate];
 
 
 server.connection({
-    port: process.env.PORT || 4005
+    port: process.env.PORT || 4006
 });
 
 server.register(plugins, function(err) {
