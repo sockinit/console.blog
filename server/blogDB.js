@@ -5,6 +5,7 @@ var Vision = require('vision');
 var Handlebars = require('handlebars');
 // var Inert = require('inert');
 
+
 exports.register = function(server, options, next) {
 
     server.views({
@@ -22,6 +23,9 @@ exports.register = function(server, options, next) {
             handler: function(request, reply) {
                 console.log('a log', reply, request.params.user);
                 function retrieveBlogs(client, callback) {
+                    //uncomment following line and refresh page if you want to
+                    //flush DB
+                    // client.flushall();
                     client.LRANGE('posts', 0, -1, function(err, reply) {
                         if (err) {
                             console.log(err);
@@ -32,7 +36,13 @@ exports.register = function(server, options, next) {
                     });
                 }
                 retrieveBlogs(client, function(postObjectsArray) {
-                    reply.view('home', {data: postObjectsArray});
+                    // typeof postObjectsArray is object here
+                    var parsedArray = postObjectsArray.map(function(el) {
+                        return JSON.parse(el);
+                    }).reverse();
+                    console.log('parsedobjects ------',parsedArray);
+                    // var keysArray = Object.keys(postObjectsArray);
+                    reply.view('home', {data: parsedArray});
                 });
             }
         }
@@ -43,6 +53,47 @@ exports.register = function(server, options, next) {
         config: {
             handler: function(request, reply) {
                 reply.view('new-post');
+            }
+        }
+    });
+
+    server.route({
+        method: 'DELETE',
+        path: '/dashboard/{user}/delete',
+        config: {
+            handler: function(request, reply) {
+
+                function retrieveBlogs(client, callback) {
+                    //uncomment following line and refresh page if you want to
+                    //flush DB
+                    // client.flushall();
+                    client.LRANGE('posts', 0, -1, function(err, reply) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+
+                            callback(reply);
+                        }
+                    });
+                }
+                retrieveBlogs(client, function(postObjectsArray) {
+
+                    console.log("postObjectsArray========", postObjectsArray);
+                });
+
+
+                // function deletePost(client, objToBeDeleted, callback) {
+                //     client.lrem('posts', 0, objToBeDeleted, function(err, reply) {
+                //         if (err) {
+                //             console.log(err);
+                //         } else {
+                //             callback(reply);
+                //         }
+                //     });
+                // }
+                // deletePost(client, objToBeDeleted, function() {
+                //     reply.redirect('/dashboard/' + request.params.user);
+                // });
             }
         }
     });
@@ -82,6 +133,7 @@ exports.register = function(server, options, next) {
             }
         }
     });
+
     server.route({
         method: 'GET',
         path: '/edit-post/id',

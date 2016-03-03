@@ -1,53 +1,42 @@
-
-
-
-
-
 <div class="features">
-  <div class="features-container">
-    <div class="feature-box">
-      <a href="/new-post"><i id="icon" class="material-icons md-78">add_circle</i></a>
+    <div class="features-container">
+        <div class="feature-box">
+            <a id="add-icon">
+                <i id="icon" class="material-icons md-78">add_circle</i>
+            </a>
+        </div>
+        <script type="text/javascript">
+            document.getElementById("add-icon").href = "/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1] + "/new-post";
+        </script>
+        <div class="feature-box">
+            <a href="/edit-post">
+                <i id="icon" class="material-icons md-68">edit</i>
+            </a>
+        </div>
+        <div class="feature-box">
+            <a href="/delete-post">
+                <i id="icon" class="material-icons md-88">cancel</i>
+            </a>
+        </div>
     </div>
-    <div class="feature-box">
-      <a href="/edit-post"><i id="icon" class="material-icons md-68">edit</i></a>
-    </div>
-    <div class="feature-box">
-      <a href="/delete-post"><i id="icon" class="material-icons md-88">cancel</i></a>
-    </div>
-  </div>
 </div>
+
+{{#each data}}
+
 <div class="user-name">
-  <p>Posted by Mick Jagger</p> <br>
-  <p>2 Mars at 22h06</p>
+  <p class='user'>Posted by {{this.author}}</p> <br>
+  <p class="date">{{this.date}}</p>
+</div>
+<div class="bookmark"></div>
+
 </div>
 <div class="bookmark"></div>
 
 <div class="post">
-  <h3>Bog post title</h3>
-  <div class="content">
-    There is not one single way to write a blog post, just as there is no one way to
-write. But having some kind of framework to pass along to would-be blog post
-writers encourages contributions by demystifying the fundamentals of a solid
-blog post, and makes contributors more comfortable with the process.
-Kodak’s chief blogger, Jenny Cisney, provides a simple blogging template to
-every contributing blogger of Kodak’s A Thousand Words blog.
-  </div>
+    <h3>{{this.title}}</h3>
+    <div class="content">
+        {{this.blog}}
+    </div>
 </div>
 
-<div class="user-name">
-  <p>Posted by Virginie</p> <br>
-  <p>2 Mars at 22h06</p>
-</div>
-<div class="bookmark"></div>
-
-<div class="post">
-  <h3>Another Awesome title</h3>
-  <div class="content">
-    There is not one single way to write a blog post, just as there is no one way to
-write. But having some kind of framework to pass along to would-be blog post
-writers encourages contributions by demystifying the fundamentals of a solid
-blog post, and makes contributors more comfortable with the process.
-Kodak’s chief blogger, Jenny Cisney, provides a simple blogging template to
-every contributing blogger of Kodak’s A Thousand Words blog.
-  </div>
-</div>
+{{/each}}
