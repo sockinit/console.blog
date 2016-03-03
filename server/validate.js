@@ -1,43 +1,37 @@
-
+var client = require('./redis.js');
 var Bcrypt = require('bcrypt');
 
 var validate = function (request, username, password, callback) {
+    var Bcrypt = require('bcrypt');
 
-    // client.SMEMBERS('users', function(err, response){
-        // if(err){
-        //     throw err;
-        // }
-        var users = [
-            JSON.stringify({username: 'ivan', password: '$2a$08$OA3Eidr7fkq7oobrbDOZ5eXHGMGprcMJoxLXV9Kcxhf/HyQCGuRB2'}),
-            JSON.stringify({username: 'jack', password: '$2a$08$u/9WsZcYA1VapdBzC1H3b.JrasR6gsJF6bQiOGAn0sAnl7CFqgmGe'})
-        ];
-
-        var userRes = users.filter(function(item){
-
+    client.SMEMBERS('users', function(err, response){
+        if(err){
+            throw err;
+        }
+        var userRes = response.filter(function(item){
             var user = JSON.parse(item);
-
-            return user[username] === request.params.username;
+            return user.username === username;
         });
-
         if (userRes.length > 0) {
-
-            var deets = JSON.parse(userRes);
-
+            var deets = JSON.parse(userRes[0]);
             Bcrypt.compare(password, deets.password, function(err, isValid) {
+                console.log(username, password, isValid);
                 callback(err, isValid, {username: deets.username});
             });
-
         } else {
+            console.log(username, password, ' doesnt exist');
             return callback (null, false);
         }
-    // });
+    });
 };
 
+
 exports.register = function(server, options, next){
+    server.auth.strategy('simple', 'basic', { validateFunc: validate });
 
     server.route({
         method: 'GET',
-        path: '/users/{username}/{password}',
+        path: '/users',
         config: {
             auth: 'simple',
             handler: function ( request, reply ){
@@ -49,6 +43,7 @@ exports.register = function(server, options, next){
 
     next();
 };
+
 exports.register.attributes = {
     name: 'validate'
 };
