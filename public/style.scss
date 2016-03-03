@@ -3,6 +3,20 @@ $turquoise : #77AAAD;
 $light-orange : wheat;
 $blue: steelblue;
 
+@mixin button {
+    float: right;
+    background-color: wheat;
+    border: none;
+    padding: 10px;
+    border-radius: 18px;
+}
+
+@mixin button-anchor {
+        text-decoration: none;
+        color: $turquoise;
+        font-size: 16px;
+        font-weight: bold;
+}
 /***************** material icons ****************/
 
 @font-face {
@@ -10,7 +24,7 @@ $blue: steelblue;
   font-style: normal;
   font-weight: 400;
   src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
-  src: local('Material Icons'), 
+  src: local('Material Icons'),
        local('MaterialIcons-Regular'),
        url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
        url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
@@ -61,6 +75,11 @@ body {
     text-align: center;
     padding: 25px 0 20px 0;
   }
+  #add {
+      @include button;
+      @include button-anchor;
+      margin: -56px 118px 0 0;
+  }
 }
 
 a { cursor: pointer; }
@@ -73,6 +92,7 @@ a { cursor: pointer; }
   width: 100%;
   color: white;
   margin-top: 20px;
+  min-height: 146px;
   h3 {
     text-align: center;
   padding: 25px;
@@ -109,6 +129,14 @@ a { cursor: pointer; }
   position: absolute;
   margin-left: 4%;
   margin-top: 145px;
+}
+
+.feature-button {
+    margin: 35px 100px 0 0;
+    @include button;
+    a {
+        @include button-anchor;
+    }
 }
 
 /******* features *****/
