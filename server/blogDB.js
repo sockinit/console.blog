@@ -1,6 +1,6 @@
 'use strict';
 
-var client = require('./client.js');
+var client = require('./client.js')('blog');
 var Vision = require('vision');
 var Handlebars = require('handlebars');
 // var Inert = require('inert');

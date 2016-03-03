@@ -1,4 +1,4 @@
-var client = require('./client.js');
+var client = require('./client.js')('blog');
 
 function addToDB(client, postObj, callback) {
     client.rpush('posts', postObj, function(err, reply) {
