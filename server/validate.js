@@ -35,7 +35,7 @@ exports.register = function(server, options, next){
         config: {
             auth: 'simple',
             handler: function ( request, reply ){
-                    reply('Welcome!');
+                    reply.redirect('/dashboard/' + request.auth.credentials.username);
                 }
             }
     });
