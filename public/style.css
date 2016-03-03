@@ -1,0 +1,186 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
+       url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
+       url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+/********** default **********/
+
+a {
+  cursor: pointer;
+}
+
+body {
+  background-color: #486b85;
+  /*background-image: url("http://www.transparenttextures.com/patterns/black-thread-light.png");*/
+  font-family: Arial;
+}
+
+* { margin: 0;}
+
+.header {
+  width: 100%;
+  height: 100px;
+  margin: 0;
+  background-color: white;
+}
+
+h1 {
+  color: #486b85;
+  text-align: center;
+  padding: 25px 0 20px 0;
+}
+
+/**************** blog post ***************/
+
+.post {
+  background-color:  #77AAAD;
+  width: 100%;
+  color: white;
+  margin-top: 20px;
+}
+
+.user-name {
+  position: absolute;
+width: 150px;
+height: 90px;
+background-color: white;
+color: #77AAAD;
+padding-top: 35px;
+margin-left: 4%;
+margin-top: 20px;
+}
+
+p {
+  text-align: center;
+}
+
+.bookmark {
+  width: 0;
+height: 0;
+border-right: 75px solid white;
+border-left: 75px solid white;
+border-bottom: 30px solid transparent;
+position: absolute;
+margin-left: 4%;
+margin-top: 145px;
+}
+
+.content {
+  padding-top: 0;
+    padding-right: 60px;
+    padding-bottom: 40px;
+    padding-left: 24%;
+}
+
+h3 {
+  text-align: center;
+padding: 25px;
+font-style: italic;
+}
+
+/******* features *****/
+
+.features {
+  height: 50px;
+  background-color: wheat;
+  margin-top: -20px;
+  padding: 10px 0 5px 0;
+}
+
+.feature-box {
+  width: 33%;
+    float: right;
+}
+
+.feature-box a {
+  text-align: center;
+  text-decoration: none;
+}
+
+#icon {
+  width: inherit;
+margin-right: auto;
+margin-left: auto;
+display: block;
+font-size: 40px;
+color: steelblue;
+}
+
+.features-container {
+    height: inherit;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/************* add form ***********/
+
+.form {
+  width: 73%;
+  margin: 65px auto 0 auto;
+}
+
+input {
+  width: 300px;
+  border-radius: 25px;
+  border: 3px solid wheat;
+height: 35px;
+margin: 0 auto 20px auto;
+display: block;
+padding-left: 20px;
+font-size: 16px;
+color: #77AAAD;
+outline: none;
+}
+
+textarea {
+  border: 3px solid wheat;
+    font-size: 15px;
+    padding: 10px;
+    color: #77AAAD;
+    outline: none;
+}
+
+button {
+  background-color: wheat;
+border: none;
+border-radius: 20px;
+font-size: 17px;
+padding: 6px;
+cursor: pointer;
+color: #486B85;
+float: right;
+margin: 20px 28px;
+}
