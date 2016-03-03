@@ -16,13 +16,24 @@ var plugins = [Inert, Vision, Basic, blogDB, Validate];
 
 
 server.connection({
-    port: process.env.PORT || 4003
+    port: process.env.PORT || 4004
 });
 
 server.register(plugins, function(err) {
     if(err){
         console.log('err---->', err);
     }
+
+    server.route({
+          method: 'GET',
+          path: '/{param*}',
+          handler: {
+            directory: {
+              path: 'public'
+            }
+          }
+    });
+
 });
 
 server.start(function(err) {
