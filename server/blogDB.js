@@ -1,7 +1,10 @@
+'use strict';
+
 var client = require('./client.js');
 var Vision = require('vision');
 var Handlebars = require('handlebars');
 // var Inert = require('inert');
+
 
 exports.register = function(server, options, next) {
 
@@ -15,9 +18,10 @@ exports.register = function(server, options, next) {
 
     server.route({
         method: 'GET',
-        path: '/',
+        path: '/dashboard/{user}',
         config: {
             handler: function(request, reply) {
+                console.log('a log', reply, request.params.user);
                 function retrieveBlogs(client, callback) {
                     //uncomment following line and refresh page if you want to
                     //flush DB
@@ -26,6 +30,7 @@ exports.register = function(server, options, next) {
                         if (err) {
                             console.log(err);
                         } else {
+
                             callback(reply);
                         }
                     });
@@ -44,19 +49,74 @@ exports.register = function(server, options, next) {
     });
     server.route({
         method: 'GET',
-        path: '/new-post',
+        path: '/dashboard/{user}/new-post',
         config: {
             handler: function(request, reply) {
                 reply.view('new-post');
             }
         }
     });
+
     server.route({
-        method: 'POST',
-        path: '/form',
+        method: 'DELETE',
+        path: '/dashboard/{user}/delete',
         config: {
             handler: function(request, reply) {
+
+                function retrieveBlogs(client, callback) {
+                    //uncomment following line and refresh page if you want to
+                    //flush DB
+                    // client.flushall();
+                    client.LRANGE('posts', 0, -1, function(err, reply) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+
+                            callback(reply);
+                        }
+                    });
+                }
+                retrieveBlogs(client, function(postObjectsArray) {
+
+                    console.log("postObjectsArray========", postObjectsArray);
+                });
+
+
+                // function deletePost(client, objToBeDeleted, callback) {
+                //     client.lrem('posts', 0, objToBeDeleted, function(err, reply) {
+                //         if (err) {
+                //             console.log(err);
+                //         } else {
+                //             callback(reply);
+                //         }
+                //     });
+                // }
+                // deletePost(client, objToBeDeleted, function() {
+                //     reply.redirect('/dashboard/' + request.params.user);
+                // });
+            }
+        }
+    });
+
+    // adds date, author, id to db once publish button is clicked
+    //TODO check button compatibility
+
+    server.route({
+        method: 'POST',
+        path: '/dashboard/{user}/publish',
+        config: {
+            handler: function(request, reply) {
+                let dateObj = new Date();
+                let day = dateObj.getDate();
+                let month = dateObj.getMonth() + 1;
+                let year = dateObj.getFullYear();
+                let today = day + '/' + month + '/' + year;
+                console.log(today);
+                request.payload.id = Date.now();
+                request.payload.author = request.params.user;
+                request.payload.date = today;
                 var postObj = JSON.stringify(request.payload);
+
                 console.log('payload______>', request.payload, postObj);
                 function addToDB(client, callback) {
                     client.rpush('posts', postObj, function(err, reply) {
@@ -68,8 +128,18 @@ exports.register = function(server, options, next) {
                     });
                 }
                 addToDB(client, function() {
-                    reply.redirect('/');
+                    reply.redirect('/dashboard/' + request.params.user);
                 });
+            }
+        }
+    });
+
+    server.route({
+        method: 'GET',
+        path: '/edit-post/id',
+        config: {
+            handler: function(request, reply) {
+
             }
         }
     });

@@ -1,10 +1,13 @@
 <div class="features">
     <div class="features-container">
         <div class="feature-box">
-            <a href="/new-post">
+            <a id="add-icon">
                 <i id="icon" class="material-icons md-78">add_circle</i>
             </a>
         </div>
+        <script type="text/javascript">
+            document.getElementById("add-icon").href = "/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1] + "/new-post";
+        </script>
         <div class="feature-box">
             <a href="/edit-post">
                 <i id="icon" class="material-icons md-68">edit</i>
@@ -18,13 +21,13 @@
     </div>
 </div>
 
+{{#each data}}
+
 <div class="user-name">
-  <p class='user'>Posted by Mick Jagger</p> <br>
-  <p class="date">2 Mars at 22h06</p>
+  <p class='user'>Posted by {{this.author}}</p> <br>
+  <p class="date">{{this.date}}</p>
 </div>
 <div class="bookmark"></div>
-
-{{#each data}}
 
 </div>
 <div class="bookmark"></div>

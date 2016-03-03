@@ -26,7 +26,7 @@ server.register(plugins, function(err) {
 
     server.route({
           method: 'GET',
-          path: '/{param*}',
+          path: '/public/{param*}',
           handler: {
             directory: {
               path: 'public'
