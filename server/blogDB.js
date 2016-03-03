@@ -116,6 +116,7 @@ exports.register = function(server, options, next) {
                 let today = day + '/' + month + '/' + year;
                 console.log(today);
                 request.payload.id = Date.now();
+                console.log('this posts id is: ' + request.payload.id);
                 request.payload.author = request.params.user;
                 request.payload.date = today;
                 var postObj = JSON.stringify(request.payload);
@@ -140,10 +141,57 @@ exports.register = function(server, options, next) {
 
     server.route({
         method: 'GET',
-        path: '/edit-post/id',
+        path: '/dashboard/{user}/edit-post/{id}',
         config: {
             handler: function(request, reply) {
+                retrieveBlogs(client, function(blogPosts){
+                    // console.log(blogPosts);
+                    blogPosts.forEach(function(post){
+                        var postObj = JSON.parse(post);
+                        if(postObj.id.toString() === request.params.id){
 
+                            reply.view('new-post', {data: postObj});
+                        }
+                    });
+                });
+            }
+        }
+    });
+
+    server.route({
+        method: 'POST',
+        path: '/dashboard/{user}/save/{id}',
+        config: {
+            handler: function(request, reply) {
+                retrieveBlogs(client, function(array){
+                    array.forEach(function(post){
+                        var postObj = JSON.parse(post);
+                        // console.log(request.params.id.toString(), ': is the id from the params should equal ' + postObj.id);
+                        if(request.params.id === postObj.id.toString()){
+                            client.lrem('posts', 0, JSON.stringify(postObj), function(err,response){
+                                console.log('removing from db');
+
+                                if(err) {
+                                    console.log(err);
+                                }
+                                else {
+                                    postObj.blog = request.payload.blog;
+                                    addToDB(client, JSON.stringify(postObj), function(){
+                                        console.log('adding to db');
+                                        reply.redirect('/dashboard/'+request.params.user);
+                                    });
+
+                                }
+                            });
+                        }
+                        // return JSON.stringify(postObj);
+                    });
+
+                    //TODO update the database with new array
+                    //     reply with correct screen
+
+                });
+                // reply.redirect('/dashboard/' + request.params.user);
             }
         }
     });
@@ -151,6 +199,25 @@ exports.register = function(server, options, next) {
     next();
 };
 
+function retrieveBlogs(client, callback) {
+    client.LRANGE('posts', 0, -1, function(err, reply) {
+        if (err) {
+            console.log(err);
+        } else {
+            callback(reply);
+        }
+    });
+}
+
+function addToDB(client, postObj, callback) {
+    client.rpush('posts', postObj, function(err, reply) {
+        if (err) {
+            console.log(err);
+        } else {
+            callback(reply);
+        }
+    });
+}
 
 exports.register.attributes = {
     name: 'blogDB'
