@@ -84,10 +84,19 @@ exports.register = function(server, options, next) {
     });
     server.route({
         method: 'GET',
-        path: '/edit-post/id',
+        path: '/dashboard/{user}/edit-post/{id}',
         config: {
             handler: function(request, reply) {
+                function retrieveBlogs(client, callback) {
+                    client.LRANGE('posts', 0, -1, function(err, reply) {
+                        if (err) {
+                            console.log(err);
+                        } else {
 
+                            callback(reply);
+                        }
+                    });
+                }
             }
         }
     });
