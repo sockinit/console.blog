@@ -17,6 +17,15 @@ exports.register = function(server, options, next) {
         layout: 'default',
         layoutPath: '../views/layout'
     });
+    server.route({
+        method: 'GET',
+        path: '/',
+        config: {
+            handler: function(request, reply) {
+                reply.redirect('/users');
+            }
+        }
+    });
 
     server.route({
         method: 'GET',
