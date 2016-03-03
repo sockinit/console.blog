@@ -35,7 +35,7 @@
   font-feature-settings: 'liga';
 }
 
-/********************/
+/********** default **********/
 
 a {
   cursor: pointer;
@@ -143,4 +143,44 @@ color: steelblue;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+}
+
+/************* add form ***********/
+
+.form {
+  width: 73%;
+  margin: 65px auto 0 auto;
+}
+
+input {
+  width: 300px;
+  border-radius: 25px;
+  border: 3px solid wheat;
+height: 35px;
+margin: 0 auto 20px auto;
+display: block;
+padding-left: 20px;
+font-size: 16px;
+color: #77AAAD;
+outline: none;
+}
+
+textarea {
+  border: 3px solid wheat;
+    font-size: 15px;
+    padding: 10px;
+    color: #77AAAD;
+    outline: none;
+}
+
+button {
+  background-color: wheat;
+border: none;
+border-radius: 20px;
+font-size: 17px;
+padding: 6px;
+cursor: pointer;
+color: #486B85;
+float: right;
+margin: 20px 28px;
 }
