@@ -1,33 +1,3 @@
-/***************** material icons ****************/
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://example.com/MaterialIcons-Regular.eot);
-  /* For IE6-8 */
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url(https://example.com/MaterialIcons-Regular.woff2) format("woff2"), url(https://example.com/MaterialIcons-Regular.woff) format("woff"), url(https://example.com/MaterialIcons-Regular.ttf) format("truetype"); }
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-  /* Support for IE. */
-  font-feature-settings: 'liga'; }
-
 /************** default ******************/
 body {
   background-color: #486b85;
@@ -112,31 +82,6 @@ a {
     font-size: 16px;
     font-weight: bold; }
 
-/******* features *****/
-.features {
-  height: 50px;
-  background-color: wheat;
-  margin-top: -20px;
-  padding: 10px 0 5px 0; }
-  .features .features-container {
-    height: inherit;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto; }
-    .features .features-container .feature-box {
-      width: 33%;
-      float: right; }
-      .features .features-container .feature-box a {
-        text-align: center;
-        text-decoration: none; }
-        .features .features-container .feature-box a #icon {
-          width: inherit;
-          margin-right: auto;
-          margin-left: auto;
-          display: block;
-          font-size: 40px;
-          color: steelblue; }
-
 /************* add form ***********/
 .form {
   width: 73%;
@@ -157,7 +102,8 @@ a {
     font-size: 15px;
     padding: 10px;
     color: #77AAAD;
-    outline: none; }
+    outline: none;
+    width: 95%; }
   .form .publish {
     background-color: wheat;
     border: none;
