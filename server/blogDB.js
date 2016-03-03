@@ -1,6 +1,6 @@
 'use strict';
 
-var client = require('./client.js');
+var client = require('./client.js')('blog');
 var Vision = require('vision');
 var Handlebars = require('handlebars');
 // var Inert = require('inert');
@@ -49,7 +49,7 @@ exports.register = function(server, options, next) {
 
     // adds date, author, id to db once publish button is clicked
     //TODO check button compatibility
-    
+
     server.route({
         method: 'POST',
         path: '/dashboard/{user}/publish',

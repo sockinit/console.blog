@@ -1,4 +1,4 @@
-var client = require('./redis.js');
+var client = require('./client.js')('users');
 var Bcrypt = require('bcrypt');
 
 var validate = function (request, username, password, callback) {

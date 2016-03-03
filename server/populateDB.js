@@ -1,4 +1,4 @@
-var client = require('./redis.js');
+var client = require('./client.js')('users');
 
 (function init() {
     console.log('populating DB');
