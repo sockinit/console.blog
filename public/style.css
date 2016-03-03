@@ -45,6 +45,17 @@ body {
     color: #486b85;
     text-align: center;
     padding: 25px 0 20px 0; }
+  .header #add {
+    float: right;
+    background-color: wheat;
+    border: none;
+    padding: 10px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: #77AAAD;
+    font-size: 16px;
+    font-weight: bold;
+    margin: -56px 118px 0 0; }
 
 a {
   cursor: pointer; }
@@ -54,7 +65,8 @@ a {
   background-color: #77AAAD;
   width: 100%;
   color: white;
-  margin-top: 20px; }
+  margin-top: 20px;
+  min-height: 146px; }
   .post h3 {
     text-align: center;
     padding: 25px;
@@ -86,6 +98,19 @@ a {
   position: absolute;
   margin-left: 4%;
   margin-top: 145px; }
+
+.feature-button {
+  margin: 35px 100px 0 0;
+  float: right;
+  background-color: wheat;
+  border: none;
+  padding: 10px;
+  border-radius: 18px; }
+  .feature-button a {
+    text-decoration: none;
+    color: #77AAAD;
+    font-size: 16px;
+    font-weight: bold; }
 
 /******* features *****/
 .features {

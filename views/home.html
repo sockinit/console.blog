@@ -1,25 +1,4 @@
-<div class="features">
-    <div class="features-container">
-        <div class="feature-box">
-            <a id="add-icon">
-                <i id="icon" class="material-icons md-78">add_circle</i>
-            </a>
-        </div>
-        <script type="text/javascript">
-            document.getElementById("add-icon").href = "/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1] + "/new-post";
-        </script>
-        <div class="feature-box">
-            <a href="/edit-post">
-                <i id="icon" class="material-icons md-68">edit</i>
-            </a>
-        </div>
-        <div class="feature-box">
-            <a href="/delete-post">
-                <i id="icon" class="material-icons md-88">cancel</i>
-            </a>
-        </div>
-    </div>
-</div>
+
 
 {{#each data}}
 
@@ -27,10 +6,17 @@
   <p class='user'>Posted by {{this.author}}</p> <br>
   <p class="date">{{this.date}}</p>
 </div>
-<div class="bookmark"></div>
 
-</div>
 <div class="bookmark"></div>
+<button class='feature-button' id={{this.id}}></button>
+
+<script type="text/javascript">
+    var aTag = document.createElement('a');
+    aTag.innerHTML = 'delete';
+    aTag.id = {{this.id}};
+    aTag.href = "/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1] + "/" + {{this.id}} + "/delete";
+    document.getElementById('{{this.id}}').appendChild(aTag);
+</script>
 
 <div class="post">
     <h3>{{this.title}}</h3>
