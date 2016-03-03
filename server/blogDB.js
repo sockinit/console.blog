@@ -9,7 +9,9 @@ var Handlebars = require('handlebars');
 exports.register = function(server, options, next) {
 
     server.views({
-        engines: { html: Handlebars },
+        engines: {
+            html: Handlebars
+        },
         relativeTo: __dirname,
         path: '../views',
         layout: 'default',
@@ -21,7 +23,6 @@ exports.register = function(server, options, next) {
         path: '/dashboard/{user}',
         config: {
             handler: function(request, reply) {
-                console.log('a log', reply, request.params.user);
                 function retrieveBlogs(client, callback) {
                     //uncomment following line and refresh page if you want to
                     //flush DB
@@ -40,9 +41,10 @@ exports.register = function(server, options, next) {
                     var parsedArray = postObjectsArray.map(function(el) {
                         return JSON.parse(el);
                     }).reverse();
-                    console.log('parsedobjects ------',parsedArray);
                     // var keysArray = Object.keys(postObjectsArray);
-                    reply.view('home', {data: parsedArray});
+                    reply.view('home', {
+                        data: parsedArray
+                    });
                 });
             }
         }
@@ -58,11 +60,21 @@ exports.register = function(server, options, next) {
     });
 
     server.route({
-        method: 'DELETE',
-        path: '/dashboard/{user}/delete',
+        method: 'GET',
+        path: '/dashboard/{user}/{id}/delete',
         config: {
             handler: function(request, reply) {
+                console.log('reached handler');
 
+                function deletePost(client, objToBeDeleted, callback) {
+                    client.lrem('posts', 0, objToBeDeleted, function(err, reply) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            callback(reply);
+                        }
+                    });
+                }
                 function retrieveBlogs(client, callback) {
                     //uncomment following line and refresh page if you want to
                     //flush DB
@@ -77,23 +89,14 @@ exports.register = function(server, options, next) {
                     });
                 }
                 retrieveBlogs(client, function(postObjectsArray) {
-
-                    console.log("postObjectsArray========", postObjectsArray);
+                    var id = request.params.id;
+                    var objToBeDeleted = postObjectsArray.filter(function(el) {
+                        return el.indexOf(id) > -1;
+                    })[0];
+                    deletePost(client, objToBeDeleted, function() {
+                        reply.redirect('/dashboard/' + request.params.user);
+                    });
                 });
-
-
-                // function deletePost(client, objToBeDeleted, callback) {
-                //     client.lrem('posts', 0, objToBeDeleted, function(err, reply) {
-                //         if (err) {
-                //             console.log(err);
-                //         } else {
-                //             callback(reply);
-                //         }
-                //     });
-                // }
-                // deletePost(client, objToBeDeleted, function() {
-                //     reply.redirect('/dashboard/' + request.params.user);
-                // });
             }
         }
     });
@@ -118,6 +121,7 @@ exports.register = function(server, options, next) {
                 var postObj = JSON.stringify(request.payload);
 
                 console.log('payload______>', request.payload, postObj);
+
                 function addToDB(client, callback) {
                     client.rpush('posts', postObj, function(err, reply) {
                         if (err) {
