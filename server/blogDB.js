@@ -22,7 +22,29 @@ exports.register = function(server, options, next) {
         path: '/',
         config: {
             handler: function(request, reply) {
-                reply.redirect('/users');
+                function retrieveBlogs(client, callback) {
+                    //uncomment following line and refresh page if you want to
+                    //flush DB
+                    // client.flushall();
+                    client.LRANGE('posts', 0, -1, function(err, reply) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+
+                            callback(reply);
+                        }
+                    });
+                }
+                retrieveBlogs(client, function(postObjectsArray) {
+                    // typeof postObjectsArray is object here
+                    var parsedArray = postObjectsArray.map(function(el) {
+                        return JSON.parse(el);
+                    }).reverse();
+                    // var keysArray = Object.keys(postObjectsArray);
+                    reply.view('landing', {
+                        data: parsedArray
+                    });
+                });
             }
         }
     });

@@ -1,0 +1,19 @@
+{{#each data}}
+
+    <div class="user-name">
+        <p class='user'>Posted by
+            {{this.author}}</p>
+        <br>
+        <p class="date">{{this.date}}</p>
+    </div>
+
+    <div class="bookmark"></div>
+
+    <div class="post">
+        <h3>{{this.title}}</h3>
+        <div class="content">
+            {{this.blog}}
+        </div>
+    </div>
+
+{{/each}}
