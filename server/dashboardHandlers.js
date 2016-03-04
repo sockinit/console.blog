@@ -13,6 +13,17 @@ var getDashboard = function (request, reply) {
         });
 };
 
+var getLandingDashboard = function (request, reply) {
+        retrieveBlogs(client, function(postObjectsArray) {
+            var parsedArray = postObjectsArray.map(function(el) {
+                return JSON.parse(el);
+            }).reverse();
+            reply.view('landing', {
+                data: parsedArray
+            });
+        });
+};
+
 //delete post
 var deletePostHandler = function (request, reply){
 
@@ -132,5 +143,6 @@ module.exports = {
     deletePostHandler: deletePostHandler,
     publishPost: publishPost,
     editPost: editPost,
-    saveEditedPost: saveEditedPost
+    saveEditedPost: saveEditedPost,
+    getLandingDashboard: getLandingDashboard
 };

@@ -19,12 +19,21 @@ exports.register = function(server, options, next) {
         helpersPath: '../views/helpers',
         // partialsPath: '../views/partials'
     });
+    server.route({
+        method: 'GET',
+        path: '/',
+        config: {
+            handler: function(request, reply) {
+                handlers.getLandingDashboard(request, reply);
+            }
+        }
+    });
 
     server.route({
         method: 'GET',
         path: '/dashboard/{user}',
         config: {
-            handler: function (request, reply){
+            handler: function(request, reply) {
                 handlers.getDashboard(request, reply);
             }
         }
@@ -64,7 +73,7 @@ exports.register = function(server, options, next) {
         method: 'GET',
         path: '/dashboard/{user}/edit-post/{id}',
         config: {
-            handler: function(request, reply){
+            handler: function(request, reply) {
                 handlers.editPost(request, reply);
             }
         }
@@ -74,7 +83,7 @@ exports.register = function(server, options, next) {
         method: 'POST',
         path: '/dashboard/{user}/save/{id}',
         config: {
-            handler: function(request, reply){
+            handler: function(request, reply) {
                 handlers.saveEditedPost(request, reply);
             }
         }
