@@ -16,7 +16,7 @@ exports.register = function(server, options, next) {
         path: '../views',
         layout: 'default',
         layoutPath: '../views/layout',
-        helpersPath: '../views/helpers',
+        // helpersPath: '../views/helpers',
         // partialsPath: '../views/partials'
     });
     server.route({
