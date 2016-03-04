@@ -15,7 +15,9 @@ exports.register = function(server, options, next) {
         relativeTo: __dirname,
         path: '../views',
         layout: 'default',
-        layoutPath: '../views/layout'
+        layoutPath: '../views/layout',
+        helpersPath: '../views/helpers',
+        // partialsPath: '../views/partials'
     });
 
     server.route({

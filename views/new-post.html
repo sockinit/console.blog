@@ -1,17 +1,14 @@
 
 <div class="form">
   <form id="new-post"  method="post">
-      <a id="back" type="button">Back</a>
+      <a id="back" type="button" href="{{backhelper}}">Back</a>
       <input class='add-title' name="title" type="text" placeholder="Title" value="{{data.title}}"><br>
       <textarea id='text-area' class='add-content' name="blog" rows="15" cols="100" placeholder="Your post content">{{ data.blog }}</textarea> <br>
       <button class='publish' type="submit"> <span id="pubsave"></span></button>
   </form>
 </div>
 <script type="text/javascript">
-    document.getElementById("back").href =  "/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1];
-    var a = document.getElementById("back");
-    console.log(a);
-    console.log("/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1]);
+
 
     if (window.location.href.indexOf("edit-post") > -1) {
         document.getElementById("new-post").action = "/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1] + "/save/" + window.location.href.match(/edit-post\/([0-9]+)/)[1];
