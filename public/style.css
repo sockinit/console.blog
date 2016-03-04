@@ -56,7 +56,17 @@ a {
   color: #77AAAD;
   padding-top: 35px;
   margin-left: 4%;
-  margin-top: 20px; }
+  margin-top: 9px; }
+  .user-name:before {
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 0;
+    right: -10px;
+    border-width: 11px 0 0 10px;
+    border-style: solid;
+    border-color: transparent #ccc;
+    content: ""; }
   .user-name .user, .user-name .date {
     text-align: center; }
 
@@ -68,7 +78,7 @@ a {
   border-bottom: 30px solid transparent;
   position: absolute;
   margin-left: 4%;
-  margin-top: 145px; }
+  margin-top: 134px; }
 
 .feature-button {
   margin: 20px 80px 0 0; }
