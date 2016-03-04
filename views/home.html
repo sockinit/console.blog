@@ -8,7 +8,7 @@
 </div>
 
 <div class="bookmark"></div>
-<button class='feature-button' id={{this.id}}></button>
+<div class='feature-button' id={{this.id}}></div>
 
 <script type="text/javascript">
     var aTag = document.createElement('a');
@@ -16,7 +16,16 @@
     aTag.id = {{this.id}};
     aTag.href = "/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1] + "/" + {{this.id}} + "/delete";
     document.getElementById('{{this.id}}').appendChild(aTag);
+
+    var bTag = document.createElement('a');
+    bTag.innerHTML = 'edit';
+    bTag.id = {{this.id}};
+    bTag.href = "/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1] + "/edit-post/" + {{this.id}};
+    document.getElementById('{{this.id}}').appendChild(bTag);
+
 </script>
+
+
 
 <div class="post">
     <h3>{{this.title}}</h3>
