@@ -1,4 +1,9 @@
+<a id="add" class='add-button'>Add</a>
+<script type="text/javascript">
+    document.getElementById("add").href = "/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1] + "/new-post";
+</script>
 
+<div class="container">
 
 {{#each data}}
 
@@ -35,3 +40,5 @@
 </div>
 
 {{/each}}
+
+</div>
