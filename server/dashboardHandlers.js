@@ -15,17 +15,14 @@ var getDashboard = function (request, reply) {
 
 //delete post
 var deletePostHandler = function (request, reply){
+
     retrieveBlogs(client, function(postObjectsArray) {
         var id = request.params.id;
         var objToBeDeleted = postObjectsArray.filter(function(el) {
-            console.log('2. made it here');
             return el.indexOf(id) > -1;
         })[0];
-        console.log('3. made it here , deleting objToBeDeleted: '+ objToBeDeleted);
 
         deletePost(client, objToBeDeleted, function() {
-            console.log('7. made it to final callback');
-
             reply.redirect('/dashboard/' + request.params.user);
         });
     });
@@ -77,7 +74,7 @@ var saveEditedPost = function(request, reply) {
                     }
                     else {
                         postObj.blog = request.payload.blog;
-                        
+
                         addToDB(client, JSON.stringify(postObj), function(){
                             reply.redirect('/dashboard/'+request.params.user);
                         });
