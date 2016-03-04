@@ -22,29 +22,7 @@ exports.register = function(server, options, next) {
         path: '/',
         config: {
             handler: function(request, reply) {
-                function retrieveBlogs(client, callback) {
-                    //uncomment following line and refresh page if you want to
-                    //flush DB
-                    // client.flushall();
-                    client.LRANGE('posts', 0, -1, function(err, reply) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-
-                            callback(reply);
-                        }
-                    });
-                }
-                retrieveBlogs(client, function(postObjectsArray) {
-                    // typeof postObjectsArray is object here
-                    var parsedArray = postObjectsArray.map(function(el) {
-                        return JSON.parse(el);
-                    }).reverse();
-                    // var keysArray = Object.keys(postObjectsArray);
-                    reply.view('landing', {
-                        data: parsedArray
-                    });
-                });
+                handlers.getLandingDashboard(request, reply);
             }
         }
     });
@@ -53,7 +31,7 @@ exports.register = function(server, options, next) {
         method: 'GET',
         path: '/dashboard/{user}',
         config: {
-            handler: function (request, reply){
+            handler: function(request, reply) {
                 handlers.getDashboard(request, reply);
             }
         }
@@ -93,7 +71,7 @@ exports.register = function(server, options, next) {
         method: 'GET',
         path: '/dashboard/{user}/edit-post/{id}',
         config: {
-            handler: function(request, reply){
+            handler: function(request, reply) {
                 handlers.editPost(request, reply);
             }
         }
@@ -103,7 +81,7 @@ exports.register = function(server, options, next) {
         method: 'POST',
         path: '/dashboard/{user}/save/{id}',
         config: {
-            handler: function(request, reply){
+            handler: function(request, reply) {
                 handlers.saveEditedPost(request, reply);
             }
         }
