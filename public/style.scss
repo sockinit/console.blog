@@ -3,19 +3,18 @@ $turquoise : #77AAAD;
 $light-orange : wheat;
 $blue: steelblue;
 
-@mixin button {
-    float: right;
-    background-color: wheat;
-    border: none;
-    padding: 10px;
-    border-radius: 18px;
-}
 
 @mixin button-anchor {
         text-decoration: none;
         color: $turquoise;
         font-size: 16px;
         font-weight: bold;
+        margin-left: 30px;
+        float: right;
+        background-color: wheat;
+        border: none;
+        padding: 10px;
+        border-radius: 18px;
 }
 
 /************** default ******************/
@@ -38,7 +37,6 @@ body {
     padding: 25px 0 20px 0;
   }
   #add {
-      @include button;
       @include button-anchor;
       margin: -56px 118px 0 0;
   }
@@ -94,10 +92,11 @@ a { cursor: pointer; }
 }
 
 .feature-button {
-    margin: 35px 100px 0 0;
-    @include button;
+    margin: 20px 80px 0 0;
+
     a {
         @include button-anchor;
+        margin-top: 17px;
     }
 }
 
