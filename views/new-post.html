@@ -8,7 +8,6 @@
   </form>
 </div>
 <script type="text/javascript">
-
     document.getElementById("back").href =  "/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1];
 
     if (window.location.href.indexOf("edit-post") > -1) {
@@ -18,5 +17,4 @@
         document.getElementById("new-post").action = "/dashboard/" + window.location.href.match(/dashboard\/([a-z]+)/)[1] + "/publish";
         document.getElementById("pubsave").innerHTML = "Publish";
     }
-
 </script>
